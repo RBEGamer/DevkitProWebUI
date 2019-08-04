@@ -16,14 +16,14 @@ The system is designed for an esay integration in CI systems.
 Copy your sourcefile including a Makefile in the `/src/app/build_files/src_to_compile` Folder.
 The main Makefile must be placed in the root of the `src_to_compile`-Folder.
 This makefile will be called at a build request. Any other Makefile will be ignored.
-You can edit the build scrip to your needs `run_build.sh`, but a rebuild of the image is required.
+You can edit the build script to your needs `run_build.sh`, but a rebuild of the image is required.
 
 
 
 # TRIGGER A BUILD
 If you or your build system placed the source files in the folder, you can trigger the build.
 
-* `DOCKER_IP:3015/rest/trigger_build` - START THE BBUILD
+* `DOCKER_IP:3015/rest/trigger_build` - STARTS THE BUILD
 * `DOCKER_IP:3015/rest/get_build_state` - RETURNS IF THE BUILD IS RUNNING AND GET THE STDOUT/STDERR
 
 # VIEW RESULT
