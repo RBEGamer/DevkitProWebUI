@@ -1,4 +1,4 @@
-<img src="logo.png" />
+![Gopher image](/logo.png)
  
 # DevkitProWebUI
 
@@ -48,4 +48,4 @@ To upload the `.nro` file from the last build to you switch call `DOCKER_IP:3015
 
 
 # ALL API CALLS
-<img src="api.png" />
+![Gopher image](/api.png)
