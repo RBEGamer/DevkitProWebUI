@@ -1,0 +1,20 @@
+{
+  "name": "devkitprowebui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcel Ochsendorf",
+  "license": "ISC",
+  "dependencies": {
+    "archiver": "^3.1.1",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^4.0.1",
+    "node-watch": "^0.6.2",
+    "rimraf": "^2.6.3",
+    "sanitize": "^2.1.0",
+    "uuid": "^3.3.2"
+  }
+}

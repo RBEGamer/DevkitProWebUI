@@ -1,0 +1,9 @@
+{
+    "output_file_types":[".nro",".elf",".nacp"],
+    "nxlink_transfer_filetype":".nro",
+    "src_dir":"./build_files/src_to_compile",
+    "out_dir":"./build_files/output_files",
+    "archive_dir":"./build_files/archive_dir"
+
+
+}
