@@ -2,8 +2,9 @@
  
 # DevkitProWebUI
 
-This api support the build of nintendo switch homebrew using devkitpro.
-You can trigger builds and transfer the output files to your switch using
+This api supports the build of nintendo switch homebrew using devkitpro.
+You can trigger builds and transfer the output files to your switch using a simple rest api.
+The system is designed for an esay integration in CI systems.
 
 
 
