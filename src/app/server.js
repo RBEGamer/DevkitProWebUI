@@ -178,6 +178,17 @@ var walkSyncNRO = function (dir, filelist) {
 };
 
 
+app.get('/rest/set_switch_upload_ip/:switchip', function (req, res) {
+    var ip = req.params.switchip;
+    if(ip == null){
+        res.json({err:-6,err_text:"invalid ip"});
+    return;
+    }
+    last_switch_upload_ip=ip;
+   res.json({err:0,err_text:"ok",last_switch_upload_ip:last_switch_upload_ip});
+});
+
+
 app.get('/rest/transfer_build', function (req, res) {
     if(last_switch_upload_ip == null){
         res.json({err:-5,err_text:"last ip not set please call /rest/transfer_build/:switchip once before using this api call to set an ip"});
