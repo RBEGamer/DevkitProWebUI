@@ -42,6 +42,7 @@ var build_ret_code = "";
 var child_build_process = null;
 var child_transfer_process = null;
 
+var last_switch_upload_ip = null;
 //https://stackoverflow.com/questions/15641243/need-to-zip-an-entire-directory-using-node-js
 function zipDirectory(source, out) {
     const archive = archiver('zip', { zlib: { level: 9 } });
@@ -177,11 +178,20 @@ var walkSyncNRO = function (dir, filelist) {
 };
 
 
+app.get('/rest/transfer_build', function (req, res) {
+    if(last_switch_upload_ip == null){
+        res.json({err:-5,err_text:"last ip not set please call /rest/transfer_build/:switchip once before using this api call to set an ip"});
+    return;
+    }
+    res.redirect('/rest/transfer_build/' + String(last_switch_upload_ip));
+});
+
 app.get('/rest/transfer_build/:switchip', function (req, res) {
     transfer_std_out = "";
     transfer_std_err = "";
 
     var ip = req.params.switchip;
+    last_switch_upload_ip = ip; //store wsitch ip for next time
     var last_build_nro = "";
     var child_transfer_process = null;
     //GET NRO last_build_files_path
@@ -198,6 +208,7 @@ app.get('/rest/transfer_build/:switchip', function (req, res) {
     var cmd = 'nxlink -r 10 -a ' + ip + ' ' + last_build_nro + '';
 
     try {
+        //CREATENXLINK COMMAND
         child_transfer_process = spawn('nxlink', ['-r', '10', '-a', ip, last_build_nro]).on('error', function (err) { throw err });
         //SAVE OUTPUT
         child_transfer_process.stdout.on('data', (chunk) => {
@@ -208,21 +219,15 @@ app.get('/rest/transfer_build/:switchip', function (req, res) {
             console.error(String(chunk.toString('utf8')));
             transfer_std_err += chunk.toString('utf8');
         });
-
-
-
+        //START PROCESS
         child_transfer_process.on('exit', (code, signal) => {
             console.log(`child process exited with code ${code}`);
             res.json({ build_uuid: build_uuid, std_out: transfer_std_out, std_err: transfer_std_err, last_build_nro: last_build_nro, last_build_files_path: last_build_files_path, cmd: cmd, code: code});
         });
     } catch (error) {
         res.json({ err: -3, err_text: "cant spawn cild process nxlink", build_uuid: build_uuid, std_out: transfer_std_out, std_err: transfer_std_err, last_build_nro: last_build_nro, last_build_files_path: last_build_files_path, cmd: cmd, code: code});
-
     }
-
-   
-
-    
+ 
 });
 
 
